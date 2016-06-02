@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>ListEmployees</title>
+</h:head>
+	<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+	<h:form rendered="#{accountBean.employee ne null}">
+	<h2 class="bg-primary">List Employees</h2>
+		#{listEmployeesBean.refreshList()}
+		<p:dataTable value="#{listEmployeesBean.employees}"
+			var="employeeElement" styleClass="table table-hover" style="font-size: 10px">
+			<p:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputText value="#{employeeElement.name}"/>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">SurName</f:facet>
+				<h:outputText value="#{employeeElement.surName}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">MiddleName</f:facet>
+				<h:outputText value="#{employeeElement.middleName}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">E-Mail</f:facet>
+				<h:outputText value="#{employeeElement.email}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">TelephoneOne</f:facet>
+				<h:outputText value="#{employeeElement.telephoneOne}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">TelephoneTwo</f:facet>
+				<h:outputText value="#{employeeElement.telephoneTwo}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Position</f:facet>
+				<h:outputText value="#{employeeElement.position}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Status</f:facet>
+				<h:outputText value="#{employeeElement.status}"/>
+			</p:column>
+
+			<p:column>
+				<h:commandLink
+					action="#{updateEmployeeBean.edit(employeeElement.id)}"
+					rendered="#{employeeElement.position ne 'SECURITY_OFFICER'}">
+					<h:graphicImage
+						value="/resources/pictures/securityOfficer/images.ico" height="30"
+						width="80" title="update" />
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</html>

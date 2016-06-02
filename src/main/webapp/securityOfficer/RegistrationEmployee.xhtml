@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>newEmployee</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+			<h:form rendered="#{accountBean.employee ne null}"
+				styleClass="form-horizontal login-form">
+				<h2 class="bg-primary">Registration Employee</h2>
+				<h:outputText
+					rendered="#{registrationEmployeeBean.msgs ne null}"
+					value="#{registrationEmployeeBean.msgs}"
+					style="color:red" />
+				<p:message for="login" style="color:red" />
+				<p:message for="psw1" style="color:red" />
+				<p:message for="psw2" style="color:red" />
+				<p:message for="name" style="color:red" />
+				<p:message for="surName" style="color:red" />
+				<p:message for="middleName" style="color:red" />
+				<p:message for="email" style="color:red" />
+				<p:message for="phone" style="color:red" />
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="login" value="Login :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputText id="login"
+						value="#{registrationEmployeeBean.employee.login}" required="true"
+						requiredMessage="#{msgs.startLogin}" styleClass="col-md-6"
+						validatorMessage="#{msgs.incorrectLogin}">
+						<f:validateRegex pattern="^[A-z0-9]{5,30}$" />
+					</p:inputText>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="psw1" value="Password :"
+						styleClass="blue col-md-4 control-label" />
+					<p:password id="psw1"
+						value="#{registrationEmployeeBean.employee.password}"
+						required="true" requiredMessage="#{msgs.startPassword}"
+						feedback="false" match="psw2" label="Password :"
+						styleClass="col-md-6" validatorMessage="#{msgs.incorrectPassword}">
+						<f:validateRegex pattern="^[A-z0-9]{5,50}$" />
+					</p:password>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="psw2" value="Repeat Password :"
+						styleClass="blue col-md-4 control-label" />
+					<p:password id="psw2"
+						value="#{registrationEmployeeBean.employee.password}"
+						required="true" requiredMessage="#{msgs.startPassword}"
+						feedback="false" label="Repeat Password :" styleClass="col-md-6"
+						validatorMessage="#{msgs.incorrectPassword}">
+						<f:validateRegex pattern="^[A-z0-9]{5,50}$" />
+					</p:password>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="name" value="Name :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputText id="name"
+						value="#{registrationEmployeeBean.employee.name}" required="true"
+						requiredMessage="#{msgs.startName}" styleClass="col-md-6"
+						validatorMessage="#{msgs.incorrectName}">
+						<f:validateRegex pattern="^[a-zA-Z]+$" />
+					</p:inputText>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="surName" value="SurName :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputText id="surName"
+						value="#{registrationEmployeeBean.employee.surName}"
+						required="true" requiredMessage="#{msgs.startSurName}"
+						styleClass="col-md-6" validatorMessage="#{msgs.incorrectSurName}">
+						<f:validateRegex pattern="^[a-zA-Z]+$" />
+					</p:inputText>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="middleName" value="MiddleName :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputText id="middleName"
+						value="#{registrationEmployeeBean.employee.middleName}"
+						required="true" requiredMessage="#{msgs.startMiddleName}"
+						styleClass="col-md-6"
+						validatorMessage="#{msgs.incorrectMiddleName}">
+						<f:validateRegex pattern="^[a-zA-Z]+" />
+					</p:inputText>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="email" value="Email :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputText id="email"
+						value="#{registrationEmployeeBean.employee.email}" required="true"
+						requiredMessage="#{msgs.startEmail}" styleClass="col-md-6"
+						validatorMessage="#{msgs.incorrectEmail}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="phone" value="Phone Number :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputMask id="phone"
+						value="#{registrationEmployeeBean.employee.telephoneOne}"
+						mask="+38(999) 999-99-99" required="true" styleClass="col-md-6"
+						requiredMessage="#{msgs.startTelephoneNumber}"
+						validatorMessage="#{msgs.incorrectTelephoneNumber}" />
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="phone2" value="Second Number :"
+						styleClass="blue col-md-4 control-label" />
+					<p:inputMask id="phone2"
+						value="#{registrationEmployeeBean.employee.telephoneTwo}"
+						mask="+38(999) 999-99-99" styleClass="col-md-6" />
+				</div>
+				
+				<div class="clearfix input-wrap">
+					<h:outputLabel for="position" value="Position :"
+						styleClass="blue col-md-4 control-label" />
+					<p:selectOneMenu id="position"
+						value="#{registrationEmployeeBean.employee.position}"
+						styleClass="col-md-6">
+						<f:selectItems value="#{registrationEmployeeBean.positions}" />
+					</p:selectOneMenu>
+				</div>
+				<br/>
+				<div class="btn-wrap">
+					<p:commandButton ajax="false" value="Submit"
+						action="#{registrationEmployeeBean.addEmployee()}"
+						styleClass="btn btn-primary btn-lg" />
+				</div>
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>

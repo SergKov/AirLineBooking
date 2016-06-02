@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Period</title>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+		<h:form rendered="#{accountBean.employee ne null}">
+			<h2 class="bg-primary">ReportByPlace</h2>
+			<p:dataTable value="#{reportBean.reportPlace}" var="report">
+				<p:column>
+					<f:facet name="header">From</f:facet>
+					<h:outputText value="#{report.leavingFrom}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">To</f:facet>
+					<h:outputText value="#{report.goingTo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Count</f:facet>
+					<h:outputText value="#{report.count}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Sum</f:facet>
+					<h:outputText value="#{report.sum}">
+						<f:convertNumber pattern="##0.00 $" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+			<br />
+			<h:panelGrid columns="2" columnClasses="left,right"
+				style="width:100%">
+				<p:chart type="pie" model="#{reportBean.pieModel1}"
+					style="width:500px; height:400px" />
+				<p:chart type="pie" model="#{reportBean.pieModel2}"
+					style="width:500px; height:400px" />
+			</h:panelGrid>
+			<br />
+			<p:commandButton value="OK" action="Period?faces-redirect=true"
+				ajax="false" styleClass="btn btn-success btn-lg" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

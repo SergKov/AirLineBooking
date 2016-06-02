@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Your Order</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<h2 class="bg-primary tickets-heading">Your Order</h2>
+			<p:dataTable value="#{cartBean.lastOrder.tickets}" var="ticket">
+				<p:column>
+					<f:facet name="header">Flight's number</f:facet>
+						#{ticket.flight.flightNumber}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">From</f:facet>
+						#{ticket.flight.leavingFrom}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">To</f:facet>
+						#{ticket.flight.goingTo}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">DepartureTime</f:facet>
+						#{ticket.flight.departureDateTime}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Name</f:facet>
+						#{ticket.name}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">SurName</f:facet>
+						#{ticket.surName}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Passport</f:facet>
+						#{ticket.passport}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Price</f:facet>
+					<h:outputText value="#{ticket.flight.price}">
+							<f:convertNumber pattern="##0.00 $" />
+						</h:outputText>
+				</p:column>
+				
+			</p:dataTable>
+			<h3>Count</h3>
+			<h:outputText value="#{cartBean.countLastOrderItems()}"/>
+			<h3>Your Sum</h3>
+			<h:outputText value="#{cartBean.countLastOrderSum()}" styleClass="price">
+				<f:convertNumber pattern="##0.00 $" />
+			</h:outputText>
+			<br/><br/>
+			<p:commandButton value="Okey" action="BookingTickets?faces-redirect=true" ajax="false" styleClass="btn btn-primary btn-lg"/>
+		</h:form>		
+	</ui:define>
+</ui:composition>
+</html>

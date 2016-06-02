@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>newCustomer</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form styleClass="form-horizontal login-form">
+			<h2 class="bg-primary tickets-heading">New Customer</h2>
+			<h:outputText rendered="#{registrationCustomerBean.msgs ne null}"
+				value="#{registrationCustomerBean.msgs}" style="color:red" />
+			<p:message for="custLogin" style="color:red" />
+			<p:message for="custPassword" style="color:red" />
+			<p:message for="psw2" style="color:red" />
+			<p:message for="custEmail" style="color:red" />
+			<p:message for="custTelephoneOne" style="color:red" />
+			<p:message for="custTelephoneTwo" style="color:red" />
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="custLogin" value="Login :"
+					styleClass="blue col-md-4 control-label" />
+				<p:inputText id="custLogin"
+					value="#{registrationCustomerBean.customer.login}" required="true"
+					requiredMessage="#{msgs.startLogin}"
+					validatorMessage="#{msgs.incorrectLogin}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z0-9]{5,30}$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="custPassword" value="Password :"
+					styleClass="blue col-md-4 control-label" />
+				<p:password id="custPassword"
+					value="#{registrationCustomerBean.customer.password}"
+					required="true" requiredMessage="#{msgs.startPassword}"
+					feedback="false" match="psw2" label="Password :"
+					validatorMessage="#{msgs.incorrectPassword}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z0-9]{5,30}$" />
+				</p:password>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="psw2" value="Repeat Password :"
+					styleClass="blue col-md-4 control-label" />
+				<p:password id="psw2"
+					value="#{registrationCustomerBean.customer.password}"
+					required="true" requiredMessage="#{msgs.startPassword}"
+					feedback="false" label="Repeat Password :" styleClass="col-md-6"
+					validatorMessage="#{msgs.incorrectPassword}">
+					<f:validateRegex pattern="^[A-z0-9]{5,50}$" />
+				</p:password>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="custEmail" value="E-mail :"
+					styleClass="blue col-md-4 control-label" />
+				<p:inputText id="custEmail"
+					value="#{registrationCustomerBean.customer.email}" required="true"
+					requiredMessage="#{msgs.startEmail}"
+					validatorMessage="#{msgs.incorrectEmail}" styleClass="col-md-6">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="custTelephoneOne" value="TelephoneOne :"
+					styleClass="blue col-md-4 control-label" />
+				<p:inputMask id="custTelephoneOne"
+					value="#{registrationCustomerBean.customer.telephoneOne}"
+					required="true" requiredMessage="#{msgs.startTelephoneNumber}"
+					validatorMessage="#{msgs.incorrectTelephoneNumber}"
+					mask="+38(999) 999-99-99" styleClass="col-md-6" />
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="custTelephoneTwo" value="TelephoneTwo :"
+					styleClass="blue col-md-4 control-label" />
+				<p:inputMask id="custTelephoneTwo"
+					value="#{registrationCustomerBean.customer.telephoneTwo}"
+					validatorMessage="#{msgs.incorrectTelephoneNumber}"
+					mask="+38(999) 999-99-99" styleClass="col-md-6" />
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton value="Submit"
+					action="#{registrationCustomerBean.createCustomer()}" ajax="false"
+					styleClass="btn btn-primary btn-lg" />
+				<p:commandButton value="Back"
+					action="BookingTickets?faces-redirect=true" immediate="true"
+					styleClass="btn btn-danger btn-lg" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

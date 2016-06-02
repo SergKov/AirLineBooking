@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Update Flight</title>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+		<h:form rendered="#{accountBean.employee ne null}"
+			styleClass="form-horizontal login-form">
+			<h2 class="bg-info">Update Price</h2>
+			<p:message for="price" style="color:red" />
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="price" value="Price :"
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="price" value="#{updateFlightBean.flight.price}"
+					required="true" requiredMessage="#{msgs.startPrice}"
+					validatorMessage="#{msgs.incorrectPrice}" styleClass="col-md-6">
+					<f:validateLength minimum="1" maximum="8" />
+					<f:convertNumber pattern="##0.00 $" />
+				</p:inputText>
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton value="Submit"
+					action="#{updateFlightBean.updatePrice()}"
+					styleClass="btn btn-primary" ajax="false" />
+				<p:commandButton value="Back" action="Timetable" immediate="true"
+					styleClass="btn btn-info" ajax="false" />
+				<p:commandButton value="Cancel" action="#{timetableBean.cancel()}"
+					immediate="true" styleClass="btn btn-danger" ajax="false" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Create Ticket</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form styleClass="form-horizontal login-form">
+			<h2 class="bg-primary tickets-heading">Create Ticket</h2>
+			<p:message for="cartName" style="color:red" />
+			<p:message for="cartPassport" style="color:red" />
+			<p:message for="cartSurName" style="color:red" />
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="cartName" value="Name :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="cartName" value="#{ticketCreationBean.ticket.name}"
+					required="true" requiredMessage="#{msgs.startName}"
+					validatorMessage="#{msgs.incorrectName}">
+					<f:validateRegex pattern="^[a-zA-Z]+$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="cartSurName" value="SurName :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="cartSurName"
+					value="#{ticketCreationBean.ticket.surName}" required="true"
+					requiredMessage="#{msgs.startSurName}"
+					validatorMessage="#{msgs.incorrectSurName}">
+					<f:validateRegex pattern="^[a-zA-Z]+$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="cartPassport" value="Passport :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="cartPassport"
+					value="#{ticketCreationBean.ticket.passport}" required="true"
+					requiredMessage="#{msgs.startPassport}"
+					validatorMessage="#{msgs.incorrectPassport}">
+					<f:validateLength minimum="1" maximum="20" />
+				</p:inputText>
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton value="Buy"
+					action="#{cartBean.addToCart(ticketCreationBean.ticket)}"
+					ajax="false" styleClass="btn btn-primary btn-lg" />
+				<p:commandButton value="Cancel"
+					action="ListFlights?faces-redirect=true" immediate="true"
+					ajax="false" styleClass="btn btn-danger btn-lg" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+</html>

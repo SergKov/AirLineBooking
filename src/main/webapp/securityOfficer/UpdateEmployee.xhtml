@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>newEmployee</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+		<h:form rendered="#{accountBean.employee ne null}"
+			styleClass="form-horizontal login-form">
+			<h2 class="bg-primary">Update Employee</h2>
+			<h:outputText
+				rendered="#{registrationEmployeeBean.exception ne null}"
+				value="#{registrationEmployeeBean.exception.message}" />
+			<p:message for="name" style="color:red" />
+			<p:message for="surName" style="color:red" />
+			<p:message for="middleName" style="color:red" />
+			<p:message for="email" style="color:red" />
+			<p:message for="telephoneOne" style="color:red" />
+			<p:message for="telephoneTwo" style="color:red" />
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="name" value="Name :"
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="name" value="#{updateEmployeeBean.employee.name}"
+					required="true" requiredMessage="#{msgs.startName}"
+					styleClass="col-md-6" validatorMessage="#{msgs.incorrectName}">
+					<f:validateRegex pattern="^[A-z]{2,30}$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="surName" value="SurName :"
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="surName"
+					value="#{updateEmployeeBean.employee.surName}" required="true"
+					requiredMessage="#{msgs.startSurName}" styleClass="col-md-6"
+					validatorMessage="#{msgs.incorrectSurName}">
+					<f:validateRegex pattern="^[A-z]{2,30}$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="middleName" value="MiddleName :"
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="middleName"
+					value="#{updateEmployeeBean.employee.middleName}" required="true"
+					requiredMessage="#{msgs.startMiddleName}" styleClass="col-md-6"
+					validatorMessage="#{msgs.incorrectMiddleName}">
+					<f:validateRegex pattern="^[A-z]{2,30}$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="email" value="Email :"
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="email" value="#{updateEmployeeBean.employee.email}"
+					required="true" requiredMessage="#{msgs.startEmail}"
+					styleClass="col-md-6" validatorMessage="#{msgs.incorrectEmail}">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="telephoneOne" value="TelephoneOne :"
+					styleClass="col-md-4 control-label" />
+				<p:inputMask id="telephoneOne"
+					value="#{updateEmployeeBean.employee.telephoneOne}" required="true"
+					requiredMessage="#{msgs.startTelephoneNumber}"
+					validatorMessage="#{msgs.incorrectTelephoneNumber}"
+					mask="+38(999) 999-99-99" styleClass="col-md-6" />
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="telephoneTwo" value="TelephoneTwo :"
+					styleClass="col-md-4 control-label" />
+				<p:inputMask id="telephoneTwo"
+					value="#{updateEmployeeBean.employee.telephoneTwo}"
+					mask="+38(999) 999-99-99" styleClass="col-md-6" />
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="position" value="Position :"
+					styleClass="col-md-4 control-label" />
+				<p:selectOneMenu id="position" styleClass="dropdown-menu"
+					value="#{updateEmployeeBean.employee.position}">
+					<f:selectItems value="#{updateEmployeeBean.positions}" />
+				</p:selectOneMenu>
+			</div>
+			<br/>
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="status" value="Status :"
+					styleClass="col-md-4 control-label" />
+				<p:selectOneMenu id="status"
+					value="#{updateEmployeeBean.employee.status}">
+					<f:selectItems value="#{updateEmployeeBean.statuses}" />
+				</p:selectOneMenu>
+			</div>
+			<br/>
+			<div class="btn-wrap">
+				<p:commandButton ajax="false" value="Submit"
+					action="#{updateEmployeeBean.update()}"
+					styleClass="btn btn-success btn-lg" />
+				<p:commandButton ajax="false" value="Back"
+					action="ListEmployees?faces-redirect=true" immediate="true"
+					styleClass="btn btn-danger btn-lg" />
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

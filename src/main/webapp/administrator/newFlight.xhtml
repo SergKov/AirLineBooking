@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>newFlight</title>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+		<h:form rendered="#{accountBean.employee ne null}"
+			styleClass="form-horizontal login-form">
+			<h2 class="bg-success">Register Flight</h2>
+
+			<p:message for="adminFlight" style="color:red" />
+			<p:message for="adminFrom" style="color:red" />
+			<p:message for="adminTo" style="color:red" />
+			<p:message for="adminDepartureDateTime" style="color:red" />
+			<p:message for="adminArrivalDateTime" style="color:red" />
+			<p:message for="adminPrice" style="color:red" />
+			<p:message for="adminMax" style="color:red" />
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminFlight" value="FlightNumber: "
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="adminFlight"
+					value="#{addFlightBean.flight.flightNumber}" required="true"
+					requiredMessage="#{msgs.startFlightNumber}"
+					validatorMessage="#{msgs.incorrectFlightNumber}"
+					styleClass="col-md-6">
+					<f:validateLength minimum="5" maximum="10" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminFrom" value="From: "
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="adminFrom"
+					value="#{addFlightBean.flight.leavingFrom}" required="true"
+					requiredMessage="#{msgs.startPlace}"
+					validatorMessage="#{msgs.incorrectPlace}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z-\\]{2,50}" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminTo" value="To: "
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="adminTo" value="#{addFlightBean.flight.goingTo}"
+					required="true" requiredMessage="#{msgs.startPlace}"
+					validatorMessage="#{msgs.incorrectPlace}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z-\\]{2,50}" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminDepartureDateTime" value="Departure : "
+					styleClass="col-md-4 control-label" />
+				<p:calendar id="adminDepartureDateTime"
+					value="#{addFlightBean.from}" required="true"
+					requiredMessage="#{msgs.startDate}" pattern="dd/MM/yyyy HH:mm" />
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminArrivalDateTime" value="Arrival : "
+					styleClass="col-md-4 control-label" />
+				<p:calendar id="adminArrivalDateTime" value="#{addFlightBean.to}"
+					required="true" requiredMessage="#{msgs.startTime}"
+					pattern="dd/MM/yyyy HH:mm"/>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminPrice" value="Price: "
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="adminPrice" value="#{addFlightBean.flight.price}"
+					required="true" requiredMessage="#{msgs.startPrice}"
+					validatorMessage="#{msgs.incorrectPrice}" styleClass="col-md-6">
+					<f:convertNumber pattern="##0.00 $" />
+					<f:validateDoubleRange minimum="5.00" maximum="100000.00" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="adminMax" value="Maximum Passengers: "
+					styleClass="col-md-4 control-label" />
+				<p:inputText id="adminMax"
+					value="#{addFlightBean.flight.maxPassengers}" required="true"
+					requiredMessage="#{msgs.startField}"
+					validatorMessage="#{msgs.incorrectData}" styleClass="col-md-6">
+					<f:validateLongRange minimum="1" maximum="500" />
+				</p:inputText>
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton value="Submit"
+					action="#{addFlightBean.addFlight()}"
+					styleClass="btn btn-success btn-lg" ajax="false" />
+				<p:commandButton value="Back" action="Timetable" immediate="true"
+					styleClass="btn btn-primary btn-lg" ajax="false" />
+				<p:commandButton value="Cancel" action="#{timetableBean.cancel()}"
+					immediate="true" styleClass="btn btn-danger btn-lg" ajax="false" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

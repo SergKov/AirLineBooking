@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<h2>Hello Dear Customer!</h2>
+		<div class="rightCart">
+			<p:commandLink action="Cart?faces-redirect=true">
+				<h:graphicImage value="/resources/pictures/customer/cart.ico"
+					height="80" title="cart" />
+			</p:commandLink>
+			<br />
+			
+				<p class="white">
+					Count =
+					<h:outputText value="#{cartBean.countCartItems()}" />
+				</p>
+				<p class="white">
+					Sum =
+					<h:outputText value="#{cartBean.countCartSum()}">
+						<f:convertNumber pattern="##0.00 $" />
+					</h:outputText>
+				</p>
+			
+		</div>
+
+		<h:form>
+			<p:commandLink value="SignIn"
+				rendered="#{signInCustomerBean.customer eq null}"
+				action="CustomerSignIn?faces-redirect=true" styleClass="colorLink" />
+			<br />
+			<p:commandLink value="Registration"
+				rendered="#{signInCustomerBean.customer eq null}"
+				action="newCustomer?faces-redirect=true" styleClass="colorLink" />
+			<br />
+			<p:commandLink value="SignOut"
+				rendered="#{signInCustomerBean.customer ne null}"
+				action="#{signInCustomerBean.signOut()}" styleClass="colorLink" />
+			<br />
+			<p:commandLink value="Hello #{signInCustomerBean.customer.login}!"
+				rendered="#{signInCustomerBean.customer ne null}"
+				action="personalAccount?faces-redirect=true" styleClass="colorLink" />
+		</h:form>
+
+	</ui:composition>
+</body>
+</html>

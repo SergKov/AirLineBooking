@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>List Flights</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<h2 class="bg-primary tickets-heading">List Flights</h2>
+			<h:outputText value="#{storeBean.findTickets()}" rendered="false" />
+			<div class="empty">
+				<h:outputText value="No flights by this data" rendered="#{empty storeBean.flights}"/>
+			</div>
+			<p:dataTable value="#{storeBean.flights}" var="flight"
+				rendered="#{not empty storeBean.flights}">
+				<p:column>
+					<f:facet name="header">Flight's number</f:facet>
+					<h:outputText value="#{flight.flightNumber}"></h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">From</f:facet>
+					<h:outputText value="#{flight.leavingFrom}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">To</f:facet>
+					<h:outputText value="#{flight.goingTo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Departure</f:facet>
+					<h:outputText value="#{flight.departureDateTime}">
+						<f:convertDateTime pattern="dd/MM/yyy HH:mm"></f:convertDateTime>
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Arrival</f:facet>
+					<h:outputText value="#{flight.arrivalInDateTime}">
+						<f:convertDateTime pattern="dd/MM/yyy HH:mm"></f:convertDateTime>
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Price</f:facet>
+					<h:outputText value="#{flight.price}">
+						<f:convertNumber pattern="##0.00 $" />
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">MaxPassengers</f:facet>
+					#{flight.maxPassengers}
+			</p:column>
+
+				<p:column>
+					<f:facet name="header">Available</f:facet>
+					#{flight.passengersAvailable}
+			</p:column>
+
+				<p:column>
+					<f:facet name="header"></f:facet>
+					<p:commandLink
+						action="#{ticketCreationBean.initTicketCreation(flight)}"
+						ajax="false">
+						<h:graphicImage value="/resources/pictures/customer/buy.ico"
+							height="40" width="100" title="buy"></h:graphicImage>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			<br />
+			<p:commandButton value="Cancel" action="BookingTickets" ajax="false"
+				styleClass="btn btn-danger btn-lg" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

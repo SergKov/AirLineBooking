@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Period</title>
+	<h:outputStylesheet name="css/style.css" />
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+			<h:form rendered="#{accountBean.employee ne null}"
+				styleClass="form-horizontal login-form">
+				<h2 class="bg-primary">Choose period</h2>
+				<p:message for="dateFrom" style="color:red" />
+				<p:message for="dateTo" style="color:red" />
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="dateFrom" value="Date From :"
+						styleClass="col-md-4 control-label" />
+					<p:calendar id="dateFrom" value="#{timetableBean.from}"
+						required="true" requiredMessage="#{msgs.startDate}"
+						styleClass="col-md-6" />
+				</div>
+
+				<div class="clearfix input-wrap">
+					<p:outputLabel for="dateTo" value="Date To :"
+						styleClass="col-md-4 control-label" />
+					<p:calendar id="dateTo" value="#{timetableBean.to}" required="true"
+						requiredMessage="#{msgs.startDate}" styleClass="col-md-6" />
+				</div>
+
+				<div class="btn-wrap">
+					<p:commandButton action="Timetable" ajax="false" value="Submit"
+						styleClass="btn btn-primary btn-lg" />
+				</div>
+			</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

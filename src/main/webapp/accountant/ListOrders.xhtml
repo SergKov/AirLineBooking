@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Edit Timetable</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateEmployee.xhtml">
+	<ui:define name="content">
+		<h:form rendered="#{accountBean.employee ne null}">
+			<h2 class="bg-primary">Edit Orders List</h2>
+			#{orderListBean.getAllBookedTickets()}
+			<div class="empty">
+				<h:outputText value="Not booked orders"
+					rendered="#{empty orderListBean.orders}" />
+			</div>
+			<p:dataTable value="#{orderListBean.orders}" var="order"
+				styleClass="table table-bordered"
+				rendered="#{not empty orderListBean.orders}">
+				<p:column>
+					<f:facet name="header">Number</f:facet>
+						#{order.id}
+					</p:column>
+
+				<p:column>
+					<f:facet name="header">Status</f:facet>
+						#{order.statusOrder}
+					</p:column>
+
+				<p:column>
+					<f:facet name="header">ModifyDateTime</f:facet>
+					<h:outputText value="#{order.modifyDateTime}">
+						<f:convertDateTime timeZone="EET" pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Cancel</f:facet>
+					<p:commandButton action="#{orderListBean.cancel(order.id)}"
+						value="Cancel" rendered="#{order.statusOrder eq 'BOOKED'}"
+						ajax="false" styleClass="btn btn-warning" />
+				</p:column>
+
+				<p:column rendered="#{accountBean.employee ne null}">
+					<p:commandLink action="#{orderListBean.update(order.id)}"
+						ajax="false">
+						<h:graphicImage value="/resources/pictures/accountant/sold.ico"
+							height="30" width="100" title="edit" />
+					</p:commandLink>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Personal Account</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form  rendered="#{signInCustomerBean.customer ne null}">
+			<h2 class="bg-primary tickets-heading">Your orders</h2>
+			#{personalAccountBean.findAllCustomerOrders(signInCustomerBean.customer.id)}
+			<div class="empty">
+				<h:outputText value="You don't have orders" rendered="#{empty personalAccountBean.orders}"/>
+			</div>
+			<p:dataTable value="#{personalAccountBean.orders}" var="order" rendered="#{not empty personalAccountBean.orders}">
+				<p:column>
+					<f:facet name="header">Number</f:facet>
+						#{order.id}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">ModifyTime</f:facet>
+					<h:outputText value="#{order.modifyDateTime}" styleClass="cellMiddle">
+						<f:convertDateTime timeZone = "EET" pattern="dd/MM/yyyy HH:mm:ss"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Status</f:facet>
+						#{order.statusOrder}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Tickets</f:facet>
+					<p:commandButton value="Show" type="button"
+						onclick="PF('ticketsDialog').show();" />
+					<p:dialog header="Order №#{order.id}" widgetVar="ticketsDialog"
+						modal="true">
+						<p:dataTable value="#{order.tickets}" var="ticket">
+							<p:column>
+								<f:facet name="header">Flight's number</f:facet>
+								#{ticket.flight.flightNumber}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">From</f:facet>
+								#{ticket.flight.leavingFrom}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">To</f:facet>
+								#{ticket.flight.goingTo}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Departure</f:facet>
+								<h:outputText value="#{ticket.flight.departureDateTime}">
+									<f:convertDateTime timeZone = "EET" pattern="dd/MM/yyy HH:mm"/>
+								</h:outputText>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">Arrival</f:facet>
+								<h:outputText value="#{ticket.flight.arrivalInDateTime}">
+									<f:convertDateTime timeZone = "EET" pattern="dd/MM/yyy HH:mm"/>
+								</h:outputText>
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Name</f:facet>
+								#{ticket.name}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">SurName</f:facet>
+								#{ticket.surName}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Passport</f:facet>
+								#{ticket.passport}
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Price</f:facet>
+								<h:outputText value="#{ticket.flight.price}">
+									<f:convertNumber pattern="##0.00 $" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+					</p:dialog>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Cancel</f:facet>
+					<p:commandButton action="#{personalAccountBean.cancel(order.id)}"
+						value="Cancel" rendered="#{order.statusOrder eq 'BOOKED'}"
+						ajax="false" />
+				</p:column>
+
+			</p:dataTable>
+			<br/>
+			<p:commandButton value="Okey" styleClass="btn btn-primary btn-lg"
+				action="BookingTickets?faces-redirect=true" ajax="false" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

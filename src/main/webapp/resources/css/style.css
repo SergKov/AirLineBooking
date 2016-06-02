@@ -1,0 +1,243 @@
+@CHARSET "UTF-8";
+
+.content {
+	margin-right: 10%;
+}
+
+h2 {
+	color: red;
+	text-align: center;
+	letter-spacing: 12px;
+}
+
+.bg-primary {
+	color: #fff;
+	background-color: #337ab7;
+	border-radius: 10px;
+}
+
+.blue {
+	color: blue;
+}
+
+@media ( min-width :1800px) {
+	.container {
+		width: 1770px;
+	}
+}
+
+.login-form {
+	max-width: 600px;
+	margin: auto;
+}
+
+.login-form .btn-wrap {
+	text-align: center;
+}
+
+.login-form .btn-wrap button {
+	margin: 5px;
+}
+
+.signout-form .leftName {
+	font-size: 18px;
+}
+
+.signout-form {
+	text-align: right;
+	background-image: url(../pictures/Bootstrap.png);
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+.input-wrap label {
+	width: 36%;
+	float: left;
+}
+
+.input-wrap input, .input-wrap>span {
+	float: left;
+	width: 40%;
+	margin-bottom: 20px;
+}
+
+.input-wrap span input {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+.cellRight {
+	text-align: right;
+	color: blue;
+}
+
+.rightCart {
+	position: fixed;
+	right: 49px;
+	top: 27px;
+}
+
+.securityCenter .leftName {
+	text-align: left;
+	font-weight: 900;
+	font-size: 25px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.rightLink {
+	margin-top: 6px;
+	display: inline-block;
+}
+
+.continue {
+	background-color: #00FF00;
+}
+
+.cancel {
+	background-color: #FF0000;
+}
+
+.exception {
+	color: red;
+	font-weight: 900;
+}
+
+.plane {
+	background-image: url(../resources/pictures/customer/plane1.jpg);
+}
+
+.rightCart {
+	text-align: right;
+	position: fixed;
+	right: 50px;
+}
+
+.centerTitle {
+	text-align: center;
+}
+
+.price {
+	color: #FF0000;
+	font-weight: 900;
+	font-size: 25px;
+}
+
+.count {
+	color: blue;
+	font-size: 20px;
+}
+
+.securityCenter {
+	margin: 20px;
+	position: relative;
+}
+
+.empty {
+	text-align: center;
+	letter-spacing: 8px;
+	font-size: 30px;
+}
+
+p {
+	margin: 0;
+}
+
+.imgCenter {
+	text-align: center;
+}
+
+.nature {
+	background-image: url(../resources/pictures/administrator/images.jpg);
+}
+
+.colorLink {
+	color: black;
+}
+
+.securityCenter .officerCenter {
+	text-align: center;
+}
+
+.signOutBtn {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.officerCenter a {
+	color: black;
+}
+
+.officerCenter a:hover, .officerCenter a:focus {
+	color: black;
+}
+
+.white {
+	color: white;
+	font-weight: 900;
+	font-size: 15px;
+}
+
+@media ( max-width : 767px) {
+	.input-wrap label {
+		width: 100%;
+		float: none;
+		text-align: center;
+		display: block;
+		margin-bottom: 20px;
+	}
+	.input-wrap input, .input-wrap>span {
+		display: block;
+		float: none;
+		width: 100%;
+	}
+	.nature {
+		width: 100%;
+		float: none;
+		display: block;
+	}
+	.plane {
+		width: 100%;
+		float: none;
+		display: block;
+	}
+	.imgCenter div {
+		text-align: center;
+		width: 50px;
+		height: 50px;
+		display: block;
+		float: none;
+	}
+	.rightCart img {
+		margin-right: 10px;
+	}
+	.signOutBtn {
+		position: static;
+		float: right;
+		margin-top: 10px;
+	}
+	.securityCenter .leftName {
+		position: static;
+		float: left;
+	}
+	.officerCenter {
+		margin-top: 15px;
+	}
+	.officerCenter a {
+		display: block;
+	}
+	.rightCart {
+		position: absolute;
+		top: 100px;
+		right: 0;
+		text-align: left;
+	}
+	.tickets-heading {
+		margin-top: 100px;
+	}
+}

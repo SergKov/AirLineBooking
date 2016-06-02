@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Booking tickets</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form styleClass="form-horizontal login-form">
+			<h2 class="bg-primary tickets-heading">Booking Tickets</h2>
+			<p:message for="flightFrom" style="color:red" />
+			<p:message for="flightTo" style="color:red" />
+			<p:message for="departureDate" style="color:red" />
+			
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="flightFrom" value="From :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="flightFrom" value="#{storeBean.from}"
+					required="true" requiredMessage="#{msgs.startField}"
+					validatorMessage="#{msgs.incorrectData}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z-\\]{2,50}" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="flightTo" value="To :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="flightTo" value="#{storeBean.to}" required="true"
+					requiredMessage="#{msgs.startField}"
+					validatorMessage="#{msgs.incorrectData}" styleClass="col-md-6">
+					<f:validateRegex pattern="^[A-z-\\]{2,50}" />
+				</p:inputText>
+			</div>
+
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="departureDate" value="DepartureDate :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:calendar id="departureDate" value="#{storeBean.dateDepart}"
+					required="true" requiredMessage="#{msgs.startField}" />
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton ajax="false" value="Find"
+					action="#{storeBean.findTickets()}"
+					styleClass="btn btn-success btn-lg" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

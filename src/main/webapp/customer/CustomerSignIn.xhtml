@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Customer SignIn</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form styleClass="form-horizontal login-form">
+			<h2 class="bg-primary tickets-heading">SignIn For Customer</h2>
+			<h:outputText rendered="#{signInCustomerBean.msgs ne null}"
+				value="#{signInCustomerBean.msgs}" style="color:red" />
+			<p:message for="custLogin" style="color:red" />
+			<p:message for="custPassword" style="color:red" />
+			
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="custLogin" value="Login :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:inputText id="custLogin" value="#{signInCustomerBean.login}"
+					required="true" requiredMessage="#{msgs.startLogin}"
+					validatorMessage="#{msgs.incorrectLogin}" styleClass="col-md-6">
+					<f:validateLength minimum="3" maximum="50" />
+				</p:inputText>
+			</div>
+			
+			<div class="clearfix input-wrap">
+				<h:outputLabel for="custPassword" value="Password :"
+					styleClass="cellRight; col-md-4 control-label" />
+				<p:password id="custPassword" value="#{signInCustomerBean.password}"
+					required="true" requiredMessage="#{msgs.startPassword}"
+					validatorMessage="#{msgs.incorrectPassword}" styleClass="col-md-6">
+					<f:validateLength minimum="3" maximum="50" />
+				</p:password>
+			</div>
+
+			<div class="btn-wrap">
+				<p:commandButton value="Submit"
+					action="#{signInCustomerBean.signIn()}" ajax="false"
+					styleClass="btn btn-success btn-lg">
+				</p:commandButton>
+				<p:commandButton value="Back"
+					action="BookingTickets?faces-redirect=true" ajax="false"
+					immediate="true" styleClass="btn btn-danger btn-lg" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

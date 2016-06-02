@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Make Order</title>
+</h:head>
+<ui:composition template="/WEB-INF/templates/templateCustomer.xhtml">
+	<ui:define name="content">
+		<h:form class="form-horizontal login-form">
+		<h2 class="bg-primary tickets-heading">Prepare Order</h2>
+			<h:outputText rendered="#{cartBean.exception ne null}" value="#{cartBean.exception.message}" styleClass="exception"/>
+			<p:message for="cartTelephone" style="color:red" />
+			<p:message for="cartEmail" style="color:red" />
+			
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="cartTelephone" value="Telephone's number" styleClass="cellRight; col-md-4 control-label"/>
+				<p:inputMask id="cartTelephone" value="#{cartBean.telephone}"
+					required="true" requiredMessage="#{msgs.startTelephoneNumber}"
+					validatorMessage="#{msgs.incorrectTelephoneNumber}"
+					mask="+38(999) 999-99-99" />					
+			</div>
+			
+			<div class="clearfix input-wrap">
+				<p:outputLabel for="cartEmail" value="Email" styleClass="cellRight; col-md-4 control-label"/>
+				<p:inputText id="cartEmail" value="#{cartBean.email}"
+					required="true" requiredMessage="#{msgs.startEmail}"
+					validatorMessage="#{msgs.incorrectEmail}">
+					<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+			</div>
+			
+			<div class="btn-wrap">
+				<p:commandButton value="Submit" action="#{cartBean.submitOrder()}"
+					ajax="false" styleClass="btn btn-primary btn-lg"/>
+				<p:commandButton value="Back" action="BookingTickets?faces-redirect=true"
+					ajax="false" styleClass="btn btn-danger btn-lg" immediate="true"/>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
